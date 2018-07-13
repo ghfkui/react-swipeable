@@ -202,8 +202,14 @@ Swipeable.defaultProps = {
     const compareMovedAngle = (x, y) => Math.atan(Math.abs(y) / Math.abs(x)) <= Math.PI / 6
     const deltaX = currentPageX - startPageX
     const deltaY = currentPageY - startPageY
-    const newDeltaX = (xFreezed || compareMovedAngle(deltaX, deltaY)) ? 0 : deltaX
-    const newDeltaY = (yFreezed || compareMovedAngle(deltaX, deltaY)) ? 0 : deltaY
+    let newDeltaX = deltaX
+    let newDelatY = deltaY
+    if (xFreezed && compareMovedAngle(deltaX, deltaY)) {
+      newDeltaY = 0
+    }
+    if (yFreezed && compareMovedAngle(deltaX, deltaY)) {
+      newDeltaX = 0
+    }
     return {
       deltaX: newDeltaX,
       deltaY: newDeltaY,
