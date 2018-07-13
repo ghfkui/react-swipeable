@@ -204,11 +204,17 @@ Swipeable.defaultProps = {
     const deltaY = currentPageY - startPageY
     let newDeltaX = deltaX
     let newDelatY = deltaY
-    if (xFreezed && compareMovedAngle(deltaX, deltaY)) {
-      newDeltaY = 0
-    }
-    if (yFreezed && compareMovedAngle(deltaX, deltaY)) {
+    if (xFreezed) {
       newDeltaX = 0
+      if (compareMovedAngle(deltaX, deltaY)) {
+        newDeltaY = 0
+      }
+    }
+    if (yFreezed) {
+      newDeltaY = 0
+      if (compareMovedAngle(deltaY, deltaX)) {
+        newDeltaX = 0
+      }
     }
     return {
       deltaX: newDeltaX,
